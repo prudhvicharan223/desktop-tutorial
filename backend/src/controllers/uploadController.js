@@ -52,11 +52,14 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Multer upload middleware
+// Multer upload middleware with enhanced error handling
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: process.env.MAX_FILE_SIZE || 10 * 1024 * 1024 // 10MB default
+    fileSize: process.env.MAX_FILE_SIZE || 10 * 1024 * 1024, // 10MB default
+    files: 1, // Allow only 1 file per request
+    fields: 10, // Limit number of fields
+    parts: 20 // Limit total parts
   },
   fileFilter: fileFilter
 });
