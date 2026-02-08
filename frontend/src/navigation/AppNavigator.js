@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Text } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -11,9 +12,44 @@ import ChatListScreen from '../screens/ChatListScreen';
 import ChatScreen from '../screens/ChatScreen';
 import NewChatScreen from '../screens/NewChatScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+// Social media screens
+import FeedScreen from '../screens/FeedScreen';
+import CreatePostScreen from '../screens/CreatePostScreen';
+import ExploreScreen from '../screens/ExploreScreen';
+import ReelsScreen from '../screens/ReelsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+function FeedStack() {
+  const { colors } = useTheme();
+
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: colors.primary },
+        headerTintColor: '#fff',
+        headerTitleStyle: { fontWeight: 'bold' },
+      }}
+    >
+      <Stack.Screen 
+        name="Feed" 
+        component={FeedScreen}
+        options={{ 
+          title: 'Feed',
+          headerRight: () => (
+            <Text style={{ color: '#fff', fontSize: 24, marginRight: 15 }}>+</Text>
+          )
+        }}
+      />
+      <Stack.Screen 
+        name="CreatePost" 
+        component={CreatePostScreen}
+        options={{ title: 'Create Post' }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 function ChatStack() {
   const { colors } = useTheme();
@@ -29,7 +65,7 @@ function ChatStack() {
       <Stack.Screen 
         name="ChatList" 
         component={ChatListScreen}
-        options={{ title: 'Chats' }}
+        options={{ title: 'Messages' }}
       />
       <Stack.Screen 
         name="Chat" 
@@ -61,12 +97,41 @@ function MainTabs() {
       }}
     >
       <Tab.Screen 
+        name="FeedTab" 
+        component={FeedStack}
+        options={{
+          title: 'Feed',
+          headerShown: false,
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 24 }}>🏠</Text>,
+        }}
+      />
+      <Tab.Screen 
+        name="Explore" 
+        component={ExploreScreen}
+        options={{
+          title: 'Explore',
+          tabBarLabel: 'Explore',
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 24 }}>🔍</Text>,
+        }}
+      />
+      <Tab.Screen 
+        name="Reels" 
+        component={ReelsScreen}
+        options={{
+          title: 'Reels',
+          headerShown: false,
+          tabBarLabel: 'Reels',
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 24 }}>🎥</Text>,
+        }}
+      />
+      <Tab.Screen 
         name="ChatsTab" 
         component={ChatStack}
         options={{
-          title: 'Chats',
+          title: 'Messages',
           headerShown: false,
-          tabBarLabel: 'Chats',
+          tabBarLabel: 'Messages',
           tabBarIcon: ({ color }) => <Text style={{ fontSize: 24 }}>💬</Text>,
         }}
       />
