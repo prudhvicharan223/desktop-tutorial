@@ -1,10 +1,24 @@
-# WhatsApp Clone - Real-Time Messaging Application
+# Social Media Platform - Next Generation App
 
-A production-ready, full-stack WhatsApp-like messaging application with real-time chat, voice messages, media sharing, and more.
+A production-ready, full-stack social media application with posts, stories, reels, messaging, and advanced AI-powered features.
 
 ## 🚀 Features
 
-### Frontend (React Native + Expo)
+### Social Media Features
+- ✅ **Posts** - Text, images, videos with likes, comments, shares
+- ✅ **Stories** - 24-hour auto-expiring content
+- ✅ **Reels** - Short-form video content with swipe navigation
+- ✅ **Infinite Scrolling Feed** - Seamless content discovery
+- ✅ **AI-Powered Feed Ranking** - Personalized content recommendations
+- ✅ **Explore Page** - AI-driven content discovery
+- ✅ **Follow/Unfollow System** - Build your network
+- ✅ **Likes & Comments** - Engage with content
+- ✅ **Content Sharing** - Share posts across the platform
+- ✅ **Content Moderation** - Report and review system
+- ✅ **Creator Analytics Dashboard** - Track performance metrics
+- ✅ **Trending Tags** - Discover popular topics
+
+### Messaging Features (WhatsApp-like)
 - ✅ Phone number authentication with OTP
 - ✅ One-to-one and group chats
 - ✅ Real-time messaging with WebSockets
@@ -12,43 +26,52 @@ A production-ready, full-stack WhatsApp-like messaging application with real-tim
 - ✅ Typing indicators
 - ✅ Online/Last seen status
 - ✅ Media sharing (images, videos, voice messages, documents)
-- ✅ Emoji support
+- ✅ Push notifications support
+
+### Frontend (React Native + Expo)
+- ✅ Modern social media UI/UX
+- ✅ Bottom tab navigation (Home, Explore, Reels, Messages, Profile)
+- ✅ Infinite scroll feed
+- ✅ Story rings display
+- ✅ Swipeable reels player
+- ✅ Post creation with media
+- ✅ Explore grid layout
 - ✅ Dark mode and light mode
 - ✅ Smooth animations
-- ✅ Push notifications support
 
 ### Backend (Node.js + Express + Socket.IO)
 - ✅ RESTful API
-- ✅ Real-time messaging with Socket.IO
+- ✅ Real-time features with Socket.IO
 - ✅ JWT authentication
-- ✅ OTP verification
 - ✅ MongoDB database
-- ✅ File upload handling
-- ✅ Push notifications via Firebase
+- ✅ AI-powered feed ranking algorithm
+- ✅ Engagement score calculation
+- ✅ Story auto-expiry (24 hours)
+- ✅ Content moderation system
+- ✅ Analytics tracking
 - ✅ Rate limiting
 - ✅ Input validation
-- ✅ Basic encryption support
 
 ### Database (MongoDB)
-- ✅ User management
-- ✅ Chat and group management
-- ✅ Message storage
-- ✅ Media metadata
-- ✅ Optimized indexes
+- ✅ User management with social features
+- ✅ Posts, Stories, Reels collections
+- ✅ Comments and Follow relationships
+- ✅ Content moderation reports
+- ✅ Optimized indexes for performance
 
 ## 📁 Project Structure
 
 ```
-whatsapp-clone/
+social-media-app/
 ├── backend/                    # Node.js backend
 │   ├── src/
 │   │   ├── config/            # Configuration files
-│   │   ├── controllers/       # Route controllers
+│   │   ├── controllers/       # Route controllers (13 controllers)
 │   │   ├── middleware/        # Express middleware
-│   │   ├── models/            # Mongoose models
-│   │   ├── routes/            # API routes
-│   │   ├── services/          # Business logic
-│   │   ├── utils/             # Utility functions
+│   │   ├── models/            # Mongoose models (10 models)
+│   │   ├── routes/            # API routes (13 routes)
+│   │   ├── services/          # Business logic & Socket.IO
+│   │   ├── utils/             # Utility functions & background jobs
 │   │   └── server.js          # Entry point
 │   ├── .env.example           # Environment variables template
 │   ├── Dockerfile             # Docker configuration
@@ -56,10 +79,10 @@ whatsapp-clone/
 │
 ├── frontend/                   # React Native app
 │   ├── src/
-│   │   ├── components/        # Reusable components
+│   │   ├── components/        # Reusable components (PostCard, StoryRing, etc.)
 │   │   ├── contexts/          # React contexts
-│   │   ├── navigation/        # Navigation setup
-│   │   ├── screens/           # App screens
+│   │   ├── navigation/        # Navigation setup (Bottom tabs + Stacks)
+│   │   ├── screens/           # App screens (Feed, Explore, Reels, etc.)
 │   │   ├── services/          # API and Socket services
 │   │   ├── utils/             # Helper functions
 │   │   └── constants/         # Constants and config
@@ -153,58 +176,76 @@ whatsapp-clone/
    - Press `i` for iOS
    - Scan QR code with Expo Go app
 
-### Docker Setup (Recommended for Production)
+## 📱 Main Features Overview
 
-1. **Copy environment file:**
-   ```bash
-   cp .env.example .env
-   ```
-   Fill in your credentials in `.env`
+### Posts System
+- Create text, image, or video posts
+- Like, comment, and share posts
+- AI-powered feed ranking based on engagement
+- Tag users and add hashtags
+- View count tracking
 
-2. **Start all services:**
-   ```bash
-   docker-compose up -d
-   ```
+### Stories System
+- Upload image or video stories
+- Automatic 24-hour expiry
+- View count and viewer list
+- Swipe through stories
 
-3. **View logs:**
-   ```bash
-   docker-compose logs -f
-   ```
+### Reels System
+- Upload short-form video content
+- Vertical swipe navigation
+- Like, comment, and share reels
+- AI-powered discovery feed
 
-4. **Stop services:**
-   ```bash
-   docker-compose down
-   ```
+### Follow System
+- Follow and unfollow users
+- View followers and following lists
+- Follower count displayed on profiles
 
-## 📱 Building Android APK
+### Explore Page
+- AI-powered content discovery
+- Search posts, reels, and users
+- Trending hashtags
+- Grid layout for visual content
 
-1. **Install EAS CLI:**
-   ```bash
-   npm install -g eas-cli
-   ```
+### Analytics Dashboard
+- View post and reel performance
+- Track likes, comments, shares, views
+- Engagement rate calculation
+- Follower growth tracking
+- Top performing content
 
-2. **Login to Expo:**
-   ```bash
-   eas login
-   ```
-
-3. **Configure build:**
-   ```bash
-   eas build:configure
-   ```
-
-4. **Build APK:**
-   ```bash
-   eas build --platform android --profile preview
-   ```
+### Content Moderation
+- Report inappropriate content
+- Automated content review queue
+- Admin moderation tools
+- Content removal and user banning
 
 ## 📚 API Documentation
 
 See [API_DOCUMENTATION.md](./API_DOCUMENTATION.md) for detailed API reference.
 
+Key API endpoints:
+- `/api/posts` - Post management
+- `/api/stories` - Story management  
+- `/api/reels` - Reel management
+- `/api/explore` - Content discovery
+- `/api/analytics` - Creator analytics
+- `/api/moderation` - Content moderation
+- `/api/users/{id}/follow` - Follow system
+- `/api/messages` - Direct messaging
+
 ## 🔌 WebSocket Events
 
 See [WEBSOCKET_EVENTS.md](./WEBSOCKET_EVENTS.md) for WebSocket event documentation.
+
+Real-time events:
+- `post:new` - New post notification
+- `like:new` - Like notification
+- `comment:new` - Comment notification
+- `follow:new` - Follow notification
+- `story:viewed` - Story view notification
+- `message:new` - New message notification
 
 ## 🗄️ Database Schema
 
@@ -256,4 +297,4 @@ MIT License - feel free to use this project for learning or commercial purposes.
 
 ---
 
-**Built with ❤️ using React Native, Node.js, Express, Socket.IO, and MongoDB**
+**Built with ❤️ using React Native, Node.js, Express, Socket.IO, and MongoDB - A complete next-generation social media platform**

@@ -21,6 +21,15 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'Hey there! I am using WhatsApp Clone'
   },
+  bio: {
+    type: String,
+    default: '',
+    maxlength: 300
+  },
+  website: {
+    type: String,
+    default: ''
+  },
   isOnline: {
     type: Boolean,
     default: false
@@ -29,6 +38,33 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  // Social media stats
+  followersCount: {
+    type: Number,
+    default: 0
+  },
+  followingCount: {
+    type: Number,
+    default: 0
+  },
+  postsCount: {
+    type: Number,
+    default: 0
+  },
+  // Creator features
+  isCreator: {
+    type: Boolean,
+    default: false
+  },
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
+  // User interests for AI feed ranking
+  interests: [{
+    type: String,
+    trim: true
+  }],
   otp: {
     code: String,
     expiresAt: Date
