@@ -264,6 +264,109 @@ const initializeSocket = (server) => {
       socket.leave(chatId);
     });
 
+    // Social Media Real-time Events
+
+    // Handle new post notification
+    socket.on('post:new', async (data) => {
+      try {
+        const { postId } = data;
+        // Notify followers
+        const Follow = require('../models/Follow');
+        const followers = await Follow.find({ following: userId }).select('follower');
+        
+        followers.forEach(follow => {
+          const followerSocketId = userSockets.get(follow.follower.toString());
+          if (followerSocketId) {
+            io.to(followerSocketId).emit('post:new', {
+              userId,
+              postId,
+              userName: socket.user.name,
+              userPhoto: socket.user.profilePicture
+            });
+          }
+        });
+      } catch (error) {
+        console.error('Post notification error:', error);
+      }
+    });
+
+    // Handle like notification
+    socket.on('like:new', async (data) => {
+      try {
+        const { postId, authorId } = data;
+        const authorSocketId = userSockets.get(authorId);
+        
+        if (authorSocketId && authorId !== userId) {
+          io.to(authorSocketId).emit('like:new', {
+            postId,
+            userId,
+            userName: socket.user.name,
+            userPhoto: socket.user.profilePicture
+          });
+        }
+      } catch (error) {
+        console.error('Like notification error:', error);
+      }
+    });
+
+    // Handle comment notification
+    socket.on('comment:new', async (data) => {
+      try {
+        const { postId, commentId, authorId } = data;
+        const authorSocketId = userSockets.get(authorId);
+        
+        if (authorSocketId && authorId !== userId) {
+          io.to(authorSocketId).emit('comment:new', {
+            postId,
+            commentId,
+            userId,
+            userName: socket.user.name,
+            userPhoto: socket.user.profilePicture
+          });
+        }
+      } catch (error) {
+        console.error('Comment notification error:', error);
+      }
+    });
+
+    // Handle follow notification
+    socket.on('follow:new', async (data) => {
+      try {
+        const { followedUserId } = data;
+        const followedSocketId = userSockets.get(followedUserId);
+        
+        if (followedSocketId) {
+          io.to(followedSocketId).emit('follow:new', {
+            userId,
+            userName: socket.user.name,
+            userPhoto: socket.user.profilePicture,
+            isVerified: socket.user.isVerified
+          });
+        }
+      } catch (error) {
+        console.error('Follow notification error:', error);
+      }
+    });
+
+    // Handle story view notification
+    socket.on('story:viewed', async (data) => {
+      try {
+        const { storyId, authorId } = data;
+        const authorSocketId = userSockets.get(authorId);
+        
+        if (authorSocketId && authorId !== userId) {
+          io.to(authorSocketId).emit('story:viewed', {
+            storyId,
+            viewerId: userId,
+            viewerName: socket.user.name,
+            viewerPhoto: socket.user.profilePicture
+          });
+        }
+      } catch (error) {
+        console.error('Story view notification error:', error);
+      }
+    });
+
     // Handle disconnect
     socket.on('disconnect', async () => {
       console.log(`User disconnected: ${userId}`);

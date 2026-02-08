@@ -11,6 +11,7 @@ const connectDB = require('./config/database');
 const initializeSocket = require('./services/socket');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
 const { apiLimiter } = require('./middleware/rateLimiter');
+const { initializeJobs } = require('./utils/jobs');
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
@@ -18,6 +19,15 @@ const chatRoutes = require('./routes/chatRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 const userRoutes = require('./routes/userRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
+// Social media routes
+const postRoutes = require('./routes/postRoutes');
+const commentRoutes = require('./routes/commentRoutes');
+const followRoutes = require('./routes/followRoutes');
+const storyRoutes = require('./routes/storyRoutes');
+const reelRoutes = require('./routes/reelRoutes');
+const exploreRoutes = require('./routes/exploreRoutes');
+const moderationRoutes = require('./routes/moderationRoutes');
+const analyticsRoutes = require('./routes/analyticsRoutes');
 
 // Initialize express app
 const app = express();
@@ -28,6 +38,9 @@ connectDB();
 
 // Initialize Socket.IO
 const io = initializeSocket(server);
+
+// Initialize background jobs
+initializeJobs();
 
 // Make io accessible to routes
 app.set('io', io);
@@ -58,6 +71,15 @@ app.use('/api/chats', chatRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/upload', uploadRoutes);
+// Social media routes
+app.use('/api/posts', postRoutes);
+app.use('/api/posts', commentRoutes);
+app.use('/api/users', followRoutes);
+app.use('/api/stories', storyRoutes);
+app.use('/api/reels', reelRoutes);
+app.use('/api/explore', exploreRoutes);
+app.use('/api/moderation', moderationRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
@@ -72,14 +94,20 @@ app.get('/health', (req, res) => {
 app.get('/', (req, res) => {
   res.json({
     success: true,
-    message: 'WhatsApp Clone API',
-    version: '1.0.0',
+    message: 'Social Media API - Next Generation Platform',
+    version: '2.0.0',
     endpoints: {
       auth: '/api/auth',
       chats: '/api/chats',
       messages: '/api/messages',
       users: '/api/users',
       upload: '/api/upload',
+      posts: '/api/posts',
+      stories: '/api/stories',
+      reels: '/api/reels',
+      explore: '/api/explore',
+      moderation: '/api/moderation',
+      analytics: '/api/analytics',
       health: '/health'
     }
   });

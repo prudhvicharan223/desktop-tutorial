@@ -1,7 +1,7 @@
 {
-  "name": "whatsapp-clone-backend",
-  "version": "1.0.0",
-  "description": "WhatsApp-like real-time messaging backend",
+  "name": "social-media-backend",
+  "version": "2.0.0",
+  "description": "Next-generation social media platform backend",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
@@ -27,7 +27,8 @@
     "crypto": "^1.0.1",
     "helmet": "^7.0.0",
     "compression": "^1.7.4",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "node-cron": "^3.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.22",
