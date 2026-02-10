@@ -480,7 +480,7 @@ public class AnywhereDoorGadget : Gadget
 }
 ```
 
-**TimeClothe.cs**
+**TimeClothGadget.cs**
 
 ```csharp
 using UnityEngine;
