@@ -1,5 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { AuthProvider } from './src/contexts/AuthContext';
 import { ThemeProvider } from './src/contexts/ThemeContext';
 import AppNavigator from './src/navigation/AppNavigator';
@@ -10,6 +11,7 @@ export default function App() {
       <AuthProvider>
         <StatusBar style="auto" />
         <AppNavigator />
+        <SpeedInsights />
       </AuthProvider>
     </ThemeProvider>
   );
