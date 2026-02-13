@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Neo Gadget Town base styles */
+:root {
+  --neo-blue: #00d4ff;
+  --neo-purple: #a855f7;
+  --neo-pink: #ff6bcb;
+  --neo-dark: #0a0a1a;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--neo-dark);
+  color: #ffffff;
+  font-family: 'Exo 2', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--neo-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neo-blue);
+  border-radius: 2px;
+}
+
+/* Selection color */
+::selection {
+  background: var(--neo-purple);
+  color: white;
+}
+
+/* Neon text glow utility */
+.neon-text {
+  text-shadow:
+    0 0 7px var(--neo-blue),
+    0 0 10px var(--neo-blue),
+    0 0 21px var(--neo-blue);
+}
